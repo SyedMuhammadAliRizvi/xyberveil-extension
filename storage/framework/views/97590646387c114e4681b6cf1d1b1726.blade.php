@@ -1,0 +1,1 @@
+<x-tailadmin.flag :flag="$flag" />
