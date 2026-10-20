@@ -1,0 +1,697 @@
+/*
+  Light theme overrides.
+  bootstrap-extended.css hard-codes the dark theme (the original/default look).
+  Everything below only applies when <html data-bs-theme="light">, and mirrors
+  every selector in bootstrap-extended.css (plus a few dark-coded bits from
+  app.css / custom.css) with light-mode equivalents.
+
+  Kestrel VPN palette: slate text on a pale background, brand blue (#0070FF)
+  accent, pale blue-tinted soft surfaces, colored (not plain gray) hover
+  shadows. The pink-to-blue brand gradient (#FF335E -> #0070FF, matching the
+  logo) is reserved for a handful of high-emphasis elements only (primary
+  buttons, checked switches, the active sidebar item, active pagination/pills)
+  so the overall feel stays neutral rather than gradient-everywhere.
+*/
+
+[data-bs-theme="light"] {
+    /* Softer, more premium corner radii across every Bootstrap component
+       (cards, buttons, inputs, modals, alerts all reference these vars). */
+    --bs-border-radius-sm: .5rem;
+    --bs-border-radius: .65rem;
+    --bs-border-radius-lg: .85rem;
+    --bs-border-radius-xl: 1.1rem;
+
+    /* Re-tint Bootstrap's primary palette to the Kestrel VPN brand blue,
+       so any component reading these vars (links, *-subtle utilities,
+       focus rings) picks it up automatically. */
+    --bs-primary: #0070FF;
+    --bs-primary-rgb: 0, 112, 255;
+    --bs-primary-bg-subtle: #eaf2ff;
+    --bs-primary-border-subtle: #b8d9ff;
+    --bs-link-color: #0070FF;
+    --bs-link-color-rgb: 0, 112, 255;
+    --bs-link-hover-color: #0057CC;
+    --bs-link-hover-color-rgb: 0, 87, 204;
+
+    --bs-secondary-bg-subtle: #e2e3e5;
+    --bs-success-bg-subtle: #d1e7dd;
+    --bs-info-bg-subtle: #cff4fc;
+    --bs-warning-bg-subtle: #fff3cd;
+    --bs-danger-bg-subtle: #f8d7da;
+    --bs-light-bg-subtle: #fcfcfd;
+    --bs-dark-bg-subtle: #ced4da;
+}
+
+[data-bs-theme="light"] body {
+    color: #334155;
+    background-color: #f8fafc;
+    /* body ships with a hardcoded dark wallpaper image (bg-theme/bg-theme2 etc.) that
+       paints over any background-color — replace it with the flat pale tone
+       used across the reference site. !important beats the
+       body.bg-theme/.bg-theme2 class rules' own background-image. */
+    background-image: none !important;
+}
+
+[data-bs-theme="light"] .h1,
+[data-bs-theme="light"] .h2,
+[data-bs-theme="light"] .h3,
+[data-bs-theme="light"] .h4,
+[data-bs-theme="light"] .h5,
+[data-bs-theme="light"] .h6,
+[data-bs-theme="light"] h1,
+[data-bs-theme="light"] h2,
+[data-bs-theme="light"] h3,
+[data-bs-theme="light"] h4,
+[data-bs-theme="light"] h5,
+[data-bs-theme="light"] h6 {
+    color: #0f172a;
+}
+
+[data-bs-theme="light"] a:not(.btn) {
+    color: #334155;
+}
+
+[data-bs-theme="light"] a:not(.btn):hover {
+    color: #0070FF;
+}
+
+[data-bs-theme="light"] .table {
+    --bs-table-bg: transparent;
+    --bs-table-striped-color: rgba(15, 23, 42, 0.85);
+    --bs-table-striped-bg: rgba(15, 23, 42, 0.03);
+    --bs-table-active-color: rgba(15, 23, 42, 0.7);
+    --bs-table-active-bg: rgba(15, 23, 42, 0.06);
+    --bs-table-hover-color: #0f172a;
+    --bs-table-hover-bg: rgba(0, 112, 255, 0.04);
+    color: rgba(15, 23, 42, 0.85);
+    border-color: #e2e8f0;
+}
+
+[data-bs-theme="light"] .table-light {
+    --bs-table-bg: #f8fafc;
+    color: #0f172a;
+    border-color: #e2e8f0;
+}
+
+[data-bs-theme="light"] .form-select,
+[data-bs-theme="light"] .form-control {
+    color: #0f172a;
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+}
+
+[data-bs-theme="light"] .form-select {
+    color: #0f172a;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%230f172a' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+[data-bs-theme="light"] .form-select:disabled {
+    background-color: #e9ecef;
+}
+
+[data-bs-theme="light"] .form-select:focus,
+[data-bs-theme="light"] .form-control:focus {
+    color: #0f172a;
+    background-color: #fff;
+    border-color: #0070FF !important;
+    box-shadow: 0 0 0 .2rem rgba(0, 112, 255, .18) !important;
+}
+
+[data-bs-theme="light"] .form-control:disabled,
+[data-bs-theme="light"] .form-control[readonly] {
+    background-color: #e9ecef;
+}
+
+[data-bs-theme="light"] .form-select:focus {
+    border-color: #0070FF;
+    box-shadow: 0 0 0 .2rem rgba(0, 112, 255, .18);
+}
+
+[data-bs-theme="light"] .form-select option {
+    background-color: #fff;
+    color: #0f172a;
+}
+
+[data-bs-theme="light"] .form-check-input {
+    background-color: #fff;
+    border: 1px solid #cbd5e1;
+}
+
+[data-bs-theme="light"] .form-check-input:focus {
+    border-color: #0070FF;
+    box-shadow: 0 0 0 .2rem rgba(0, 112, 255, .18);
+}
+
+[data-bs-theme="light"] .form-check-input:checked {
+    background-color: #0070FF;
+    border-color: #0070FF;
+}
+
+/* Switches specifically get the brand gradient behind the knob (the knob's
+   own SVG background-image is preserved via var(--bs-form-switch-bg) as a
+   second, top layer) so toggles like "Auto Connect" pop the way they do in
+   the reference mockups. */
+[data-bs-theme="light"] .form-switch .form-check-input:checked {
+    background-color: #0070FF;
+    background-image: var(--bs-form-switch-bg), linear-gradient(135deg, #FF335E 0%, #0070FF 100%);
+    border-color: transparent;
+}
+
+[data-bs-theme="light"] .input-group-text {
+    color: #334155;
+    background-color: #f1f5f9;
+    border: 1px solid #e2e8f0;
+}
+
+[data-bs-theme="light"] .btn-light {
+    color: #0f172a;
+    background-color: #fff;
+    border-color: #e2e8f0;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+    transition: box-shadow .2s ease, transform .2s ease;
+}
+
+[data-bs-theme="light"] .btn-light:hover {
+    color: #0070FF;
+    background-color: #eaf2ff;
+    border-color: #b8d9ff;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, .08);
+    transform: translateY(-1px);
+}
+
+[data-bs-theme="light"] .card {
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, .03);
+    transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+
+[data-bs-theme="light"] .card:hover {
+    border-color: rgba(0, 112, 255, .35);
+    box-shadow: 0 16px 36px rgba(0, 112, 255, .08);
+    transform: translateY(-3px);
+}
+
+[data-bs-theme="light"] .card-header {
+    background-color: transparent;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+[data-bs-theme="light"] .card-footer {
+    background-color: transparent;
+    border-top: 1px solid #e2e8f0;
+}
+
+[data-bs-theme="light"] .accordion-item {
+    color: rgba(15, 23, 42, 0.85);
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+}
+
+[data-bs-theme="light"] .accordion-button {
+    color: #0f172a;
+    border: 1px solid #e2e8f0;
+    background-color: #fff;
+}
+
+[data-bs-theme="light"] .accordion-button:not(.collapsed) {
+    color: #0057CC;
+    background-color: #eaf2ff;
+}
+
+[data-bs-theme="light"] .accordion-button:focus {
+    border-color: #0070FF;
+    box-shadow: 0 0 0 .2rem rgba(0, 112, 255, .18);
+}
+
+[data-bs-theme="light"] .breadcrumb-item.active {
+    color: #0f172a;
+}
+
+[data-bs-theme="light"] .page-link {
+    color: #0070FF;
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+}
+
+[data-bs-theme="light"] .page-link:hover {
+    color: #0057CC;
+    background-color: #eaf2ff;
+    border-color: #e2e8f0;
+}
+
+[data-bs-theme="light"] .page-link:focus {
+    color: #0057CC;
+    background-color: #eaf2ff;
+    box-shadow: 0 0 0 .2rem rgba(0, 112, 255, .18);
+}
+
+[data-bs-theme="light"] .page-item.active .page-link {
+    color: #fff;
+    background-color: #0070FF;
+    background-image: linear-gradient(135deg, #FF335E 0%, #0070FF 100%);
+    border-color: transparent;
+}
+
+[data-bs-theme="light"] .page-item.disabled .page-link {
+    color: #94a3b8;
+    background-color: #fff;
+    border-color: #e2e8f0;
+}
+
+[data-bs-theme="light"] .progress {
+    background-color: #e2e8f0;
+}
+
+[data-bs-theme="light"] .progress-bar {
+    color: #fff;
+    background-color: #0070FF;
+}
+
+[data-bs-theme="light"] .list-group-item {
+    color: #0f172a;
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+}
+
+[data-bs-theme="light"] .modal-content {
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+}
+
+[data-bs-theme="light"] .modal-header {
+    border-bottom: 1px solid #e2e8f0;
+}
+
+[data-bs-theme="light"] .modal-footer {
+    border-top: 1px solid #e2e8f0;
+}
+
+[data-bs-theme="light"] .border {
+    border: 1px solid #e2e8f0 !important;
+}
+
+[data-bs-theme="light"] .border-top {
+    border-top: 1px solid #e2e8f0 !important;
+}
+
+[data-bs-theme="light"] .border-end {
+    border-right: 1px solid #e2e8f0 !important;
+}
+
+[data-bs-theme="light"] .border-bottom {
+    border-bottom: 1px solid #e2e8f0 !important;
+}
+
+[data-bs-theme="light"] .border-start {
+    border-left: 1px solid #e2e8f0 !important;
+}
+
+[data-bs-theme="light"] .text-light {
+    color: #0f172a !important;
+}
+
+[data-bs-theme="light"] .text-light-1 {
+    color: rgba(15, 23, 42, .125) !important;
+}
+
+[data-bs-theme="light"] .text-light-2 {
+    color: rgba(15, 23, 42, .70) !important;
+}
+
+[data-bs-theme="light"] .text-light-3 {
+    color: rgba(15, 23, 42, .50) !important;
+}
+
+[data-bs-theme="light"] .text-light-4 {
+    color: rgba(15, 23, 42, .20) !important;
+}
+
+[data-bs-theme="light"] .bg-light {
+    background-color: #f8fafc !important;
+}
+
+[data-bs-theme="light"] .bg-body {
+    background-color: #f8fafc !important;
+}
+
+[data-bs-theme="light"] .dropdown-menu {
+    color: #0f172a;
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px rgba(15, 23, 42, .04), 0 12px 24px rgba(15, 23, 42, .08);
+}
+
+[data-bs-theme="light"] .dropdown-divider {
+    border-top: 1px solid #e2e8f0;
+}
+
+[data-bs-theme="light"] .dropdown-item {
+    color: #334155;
+}
+
+[data-bs-theme="light"] .dropdown-item:focus,
+[data-bs-theme="light"] .dropdown-item:hover {
+    color: #0057CC !important;
+    background-color: #eaf2ff !important;
+}
+
+[data-bs-theme="light"] .dropdown-item.active,
+[data-bs-theme="light"] .dropdown-item:active {
+    color: #fff;
+    background-color: #0070FF;
+}
+
+[data-bs-theme="light"] .nav-tabs {
+    --bs-nav-tabs-link-active-color: #0f172a;
+    --bs-nav-tabs-link-hover-border-color: #e2e8f0 #e2e8f0 #e2e8f0;
+    --bs-nav-tabs-link-active-border-color: #e2e8f0 #e2e8f0 #fff;
+    --bs-nav-tabs-link-active-bg: #fff;
+    --bs-nav-tabs-border-color: #e2e8f0;
+}
+
+[data-bs-theme="light"] .nav-link,
+[data-bs-theme="light"] .nav-link:hover {
+    color: #334155;
+}
+
+[data-bs-theme="light"] .nav-pills .nav-link.active,
+[data-bs-theme="light"] .nav-pills .show > .nav-link {
+    background-color: #0070FF;
+    background-image: linear-gradient(135deg, #FF335E 0%, #0070FF 100%);
+    color: #fff;
+}
+
+/* ── Soft "light" badges: pastel bg + saturated text, instead of dark chips ── */
+
+[data-bs-theme="light"] .badge-light-primary {
+    color: #0057CC;
+    background-color: #eaf2ff;
+    border: 1px solid #ccfbf1;
+}
+
+[data-bs-theme="light"] .badge-light-info {
+    color: #055160;
+    background-color: #cff4fc;
+    border: 1px solid #cff4fc;
+}
+
+[data-bs-theme="light"] .badge-light-success {
+    color: #0f5132;
+    background-color: #d1e7dd;
+    border: 1px solid #d1e7dd;
+}
+
+[data-bs-theme="light"] .badge-light-danger {
+    color: #842029;
+    background-color: #f8d7da;
+    border: 1px solid #f8d7da;
+}
+
+[data-bs-theme="light"] .badge-light-warning {
+    color: #92660a;
+    background-color: #fff3cd;
+    border: 1px solid #fff3cd;
+}
+
+[data-bs-theme="light"] .badge-light-dark {
+    color: #0f172a;
+    background-color: #e2e3e5;
+    border: 1px solid #e2e3e5;
+}
+
+[data-bs-theme="light"] .badge-light-secondary {
+    color: #41464b;
+    background-color: #e2e3e5;
+    border: 1px solid #e2e3e5;
+}
+
+[data-bs-theme="light"] .badge {
+    font-weight: 600;
+    letter-spacing: .2px;
+}
+
+/* ── App shell chrome (app.css hard-codes a couple of dark-only spots) ── */
+
+[data-bs-theme="light"] .wrapper.toggled.sidebar-hovered .sidebar-header {
+    background-color: #fff;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+[data-bs-theme="light"] .breadcrumb-title {
+    border-right: 1.5px solid #e2e8f0;
+}
+
+[data-bs-theme="light"] .page-footer {
+    background: #fff;
+    color: #64748b;
+    border-top: 1px solid #e2e8f0;
+}
+
+[data-bs-theme="light"] .sidebar-wrapper {
+    background: #fff;
+    box-shadow: 1px 0 0 #e2e8f0, 4px 0 16px rgba(15, 23, 42, .03);
+}
+
+[data-bs-theme="light"] .topbar {
+    background: #fff;
+    box-shadow: 0 1px 0 #e2e8f0, 0 2px 12px rgba(15, 23, 42, .03);
+}
+
+[data-bs-theme="light"] .sidebar-header {
+    background: #fff;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+[data-bs-theme="light"] .sidebar-wrapper .metismenu a {
+    color: #475569;
+    border-radius: 8px;
+    margin: 0 8px;
+}
+
+[data-bs-theme="light"] .sidebar-wrapper .metismenu > li {
+    padding: 0 2px;
+}
+
+[data-bs-theme="light"] .sidebar-wrapper .metismenu a:hover {
+    color: #0070FF;
+    background: #eaf2ff;
+}
+
+[data-bs-theme="light"] .sidebar-wrapper .metismenu .mm-active > a,
+[data-bs-theme="light"] .sidebar-wrapper .metismenu a:active,
+[data-bs-theme="light"] .sidebar-wrapper .metismenu a:focus {
+    color: #fff;
+    font-weight: 500;
+    background-color: #0070FF;
+    background-image: linear-gradient(135deg, #FF335E 0%, #0070FF 100%);
+    box-shadow: 0 4px 10px rgba(0, 112, 255, .28);
+}
+
+[data-bs-theme="light"] .sidebar-wrapper .metismenu .mm-active > a iconify-icon,
+[data-bs-theme="light"] .sidebar-wrapper .metismenu a:active iconify-icon,
+[data-bs-theme="light"] .sidebar-wrapper .metismenu a:focus iconify-icon {
+    color: #fff;
+}
+
+[data-bs-theme="light"] .sidebar-wrapper .metismenu ul {
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    border-radius: 8px;
+    margin: 0 8px;
+}
+
+[data-bs-theme="light"] .menu-label {
+    color: #94a3b8;
+    font-weight: 700;
+    letter-spacing: .08em;
+}
+
+/* ── Premium touches: teal primary actions, soft lifts, crisp avatars ── */
+
+[data-bs-theme="light"] .btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #0070FF;
+    --bs-btn-border-color: #0070FF;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #0057CC;
+    --bs-btn-hover-border-color: #0057CC;
+    --bs-btn-active-bg: #0057CC;
+    --bs-btn-active-border-color: #0057CC;
+    --bs-btn-disabled-bg: #0070FF;
+    --bs-btn-disabled-border-color: #0070FF;
+    background-image: linear-gradient(135deg, #FF335E 0%, #0070FF 100%);
+    border-color: transparent;
+    box-shadow: 0 2px 6px rgba(0, 112, 255, .25);
+    transition: box-shadow .2s ease, transform .2s ease, background-image .2s ease;
+}
+
+[data-bs-theme="light"] .btn-primary:hover,
+[data-bs-theme="light"] .btn-primary:focus {
+    background-image: linear-gradient(135deg, #E62955 0%, #0057CC 100%);
+    box-shadow: 0 8px 20px rgba(0, 112, 255, .3);
+    transform: translateY(-1px);
+}
+
+[data-bs-theme="light"] .btn-primary:disabled,
+[data-bs-theme="light"] .btn-primary.disabled {
+    background-image: linear-gradient(135deg, #FF335E 0%, #0070FF 100%);
+}
+
+[data-bs-theme="light"] .btn-outline-primary {
+    --bs-btn-color: #0070FF;
+    --bs-btn-border-color: #0070FF;
+    --bs-btn-hover-bg: #0070FF;
+    --bs-btn-hover-border-color: #0070FF;
+    --bs-btn-active-bg: #0057CC;
+    --bs-btn-active-border-color: #0057CC;
+}
+
+[data-bs-theme="light"] .user-box .user-img {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px rgba(0, 112, 255, .18);
+}
+
+/* app.css hardcodes these as white text for the dark base look — invisible
+   against the light topbar with no override, which is why the admin name
+   in the top-right corner disappeared in light mode. */
+[data-bs-theme="light"] .user-info .user-name {
+    color: #0f172a;
+}
+
+[data-bs-theme="light"] .user-info .designattion {
+    color: #64748b;
+}
+
+/* Same story for the sidebar brand text and the collapse/hamburger icons —
+   hardcoded white with no light override, invisible against the white
+   sidebar header and topbar. */
+[data-bs-theme="light"] .logo-text {
+    color: #0f172a;
+}
+
+[data-bs-theme="light"] .toggle-icon {
+    color: #475569;
+}
+
+[data-bs-theme="light"] .mobile-toggle-menu {
+    color: #475569;
+}
+
+/* The breadcrumb separator glyph (appears on nearly every admin page's page
+   header) is hardcoded white in app.css — invisible against the light page
+   background with no override. */
+[data-bs-theme="light"] .page-breadcrumb .breadcrumb-item+.breadcrumb-item::before {
+    color: #94a3b8;
+}
+
+[data-bs-theme="light"] .user-box > a:hover {
+    background-color: #f1f5f9;
+}
+
+[data-bs-theme="light"] .table thead th {
+    color: #64748b;
+    border-bottom-color: #e2e8f0;
+}
+
+[data-bs-theme="light"] .text-muted {
+    color: #64748b !important;
+}
+
+/* ── Hover polish for remaining interactive/list elements ── */
+
+[data-bs-theme="light"] .nav-tabs .nav-link {
+    color: #64748b;
+    border-color: transparent;
+    border-radius: 8px 8px 0 0;
+    transition: color .2s ease, background-color .2s ease;
+}
+
+[data-bs-theme="light"] .nav-tabs .nav-link:hover {
+    color: #0070FF;
+    background-color: #eaf2ff;
+    border-color: transparent;
+}
+
+[data-bs-theme="light"] .nav-tabs .nav-link.active {
+    color: #0f172a;
+    background-color: #fff;
+    border-color: #e2e8f0 #e2e8f0 #fff;
+}
+
+[data-bs-theme="light"] .list-group-item {
+    transition: background-color .2s ease, border-color .2s ease, transform .15s ease;
+}
+
+[data-bs-theme="light"] .list-group-item:hover {
+    background-color: #eaf2ff;
+    border-color: rgba(0, 112, 255, .25);
+}
+
+/* Most tables across the app don't carry Bootstrap's .table-hover modifier
+   class, so row hover silently does nothing on most pages. Apply it
+   universally in light theme regardless of that class. */
+[data-bs-theme="light"] .table tbody tr {
+    transition: background-color .15s ease;
+}
+
+[data-bs-theme="light"] .table > tbody > tr:hover > * {
+    --bs-table-accent-bg: rgba(0, 112, 255, .05);
+    color: var(--bs-table-hover-color, inherit);
+}
+
+[data-bs-theme="light"] .btn-link:hover {
+    text-decoration: underline;
+}
+
+/* ── Outline buttons (e.g. Dashboard "Online Users") ──
+   iconify-icon renders its SVG with fill="currentColor" at insert time; force
+   the icon (not just the text) to flip to white on hover/focus/active so it
+   doesn't blend into the now-solid colored background. */
+
+[data-bs-theme="light"] .btn-outline-success,
+[data-bs-theme="light"] .btn-outline-info,
+[data-bs-theme="light"] .btn-outline-warning,
+[data-bs-theme="light"] .btn-outline-danger,
+[data-bs-theme="light"] .btn-outline-secondary {
+    box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+    transition: box-shadow .2s ease, transform .2s ease;
+}
+
+[data-bs-theme="light"] .btn-outline-success:hover,
+[data-bs-theme="light"] .btn-outline-success:focus,
+[data-bs-theme="light"] .btn-outline-success:active,
+[data-bs-theme="light"] .btn-outline-info:hover,
+[data-bs-theme="light"] .btn-outline-info:focus,
+[data-bs-theme="light"] .btn-outline-info:active,
+[data-bs-theme="light"] .btn-outline-warning:hover,
+[data-bs-theme="light"] .btn-outline-warning:focus,
+[data-bs-theme="light"] .btn-outline-warning:active,
+[data-bs-theme="light"] .btn-outline-danger:hover,
+[data-bs-theme="light"] .btn-outline-danger:focus,
+[data-bs-theme="light"] .btn-outline-danger:active,
+[data-bs-theme="light"] .btn-outline-secondary:hover,
+[data-bs-theme="light"] .btn-outline-secondary:focus,
+[data-bs-theme="light"] .btn-outline-secondary:active {
+    box-shadow: 0 6px 16px rgba(15, 23, 42, .12);
+    transform: translateY(-1px);
+}
+
+[data-bs-theme="light"] .btn-outline-success:hover iconify-icon,
+[data-bs-theme="light"] .btn-outline-success:focus iconify-icon,
+[data-bs-theme="light"] .btn-outline-success:active iconify-icon,
+[data-bs-theme="light"] .btn-outline-info:hover iconify-icon,
+[data-bs-theme="light"] .btn-outline-info:focus iconify-icon,
+[data-bs-theme="light"] .btn-outline-info:active iconify-icon,
+[data-bs-theme="light"] .btn-outline-warning:hover iconify-icon,
+[data-bs-theme="light"] .btn-outline-warning:focus iconify-icon,
+[data-bs-theme="light"] .btn-outline-warning:active iconify-icon,
+[data-bs-theme="light"] .btn-outline-danger:hover iconify-icon,
+[data-bs-theme="light"] .btn-outline-danger:focus iconify-icon,
+[data-bs-theme="light"] .btn-outline-danger:active iconify-icon,
+[data-bs-theme="light"] .btn-outline-secondary:hover iconify-icon,
+[data-bs-theme="light"] .btn-outline-secondary:focus iconify-icon,
+[data-bs-theme="light"] .btn-outline-secondary:active iconify-icon {
+    color: #fff;
+}

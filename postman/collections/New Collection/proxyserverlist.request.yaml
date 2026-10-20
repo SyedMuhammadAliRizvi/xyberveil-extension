@@ -1,0 +1,20 @@
+$kind: http-request
+description: ""
+url: http://127.0.0.1:8000/api/servers?platform=windows
+method: GET
+queryParams:
+  platform: windows
+body:
+  type: json
+  content: "{\r
+
+    \    \"email\" : \"admin@gmail.com\",\r
+
+    \    \"password\" : \"admin12345\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: 1|b6ndJqhMdnTHGbwMct60tOCF2f4I1yOd6tUsBZOyebd36b5f
+order: 1139

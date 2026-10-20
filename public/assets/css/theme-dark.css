@@ -1,0 +1,181 @@
+/*
+  Dark theme overrides.
+  The dark look ships as the hardcoded default across bootstrap.min.css /
+  bootstrap-extended.css / app.css (no [data-bs-theme="dark"] scoping
+  upstream), still tinted with stock Bootstrap blue (#0d6efd). This file
+  layers the Kestrel VPN brand on top, mirroring theme-light.css: solid
+  brand blue (#0070FF) for everyday interactive color (links, focus rings,
+  outline buttons, pagination text), and the pink-to-blue brand gradient
+  (#FF335E -> #0070FF, matching the logo) reserved for the same small set
+  of high-emphasis elements as light mode (primary buttons, checked
+  switches, the active sidebar item, active pagination/pills) so dark mode
+  reads as the same product, not a different color scheme.
+*/
+
+[data-bs-theme="dark"] {
+    /* Match light mode's softer corner radii so buttons/cards/inputs/modals
+       are the same shape in both themes — only the surface colors differ. */
+    --bs-border-radius-sm: .5rem;
+    --bs-border-radius: .65rem;
+    --bs-border-radius-lg: .85rem;
+    --bs-border-radius-xl: 1.1rem;
+
+    --bs-primary: #0070FF;
+    --bs-primary-rgb: 0, 112, 255;
+    --bs-primary-text: #4d9fff;
+    --bs-primary-bg-subtle: #062b57;
+    --bs-primary-border-subtle: #0a3d7a;
+}
+
+/* body ships with a hardcoded decorative wallpaper image (bg-theme/bg-theme2
+   etc., a leftover Quixure template asset) plus a flat off-black
+   background-color (#151313) that has nothing to do with the Kestrel brand.
+   Replace both with a deep slate-navy so dark mode reads as the same
+   product as light mode (which uses the same slate family for text/headings)
+   instead of a generic dark template. Cards/sidebar/topbar are translucent
+   overlays with no background-color of their own, so this tint cascades
+   through the whole UI automatically. */
+[data-bs-theme="dark"] body {
+    background-image: none !important;
+    background-color: #0f172a;
+}
+
+[data-bs-theme="dark"] .card {
+    border-radius: 16px;
+}
+
+/* Alert subtle-backgrounds in dark mode are quite dark (custom.css tints
+   them, e.g. --bs-danger-bg-subtle is a dark maroon), so the alert
+   component's own default text color is too low-contrast — force white,
+   which was the original (pre-rebrand) intent of this component. Light
+   mode is untouched here and correctly uses Bootstrap's own pale-bg +
+   dark-text alert styling. */
+[data-bs-theme="dark"] .alert {
+    color: #fff;
+}
+
+[data-bs-theme="dark"] .modal-content {
+    border-radius: 16px;
+}
+
+[data-bs-theme="dark"] .form-control:focus,
+[data-bs-theme="dark"] .form-select:focus {
+    border-color: #0070FF;
+    box-shadow: 0 0 0 .2rem rgba(0, 112, 255, .25);
+}
+
+[data-bs-theme="dark"] .form-check-input:focus {
+    border-color: #0070FF;
+    box-shadow: 0 0 0 .2rem rgba(0, 112, 255, .25);
+}
+
+[data-bs-theme="dark"] .form-check-input:checked {
+    background-color: #0070FF;
+    border-color: #0070FF;
+}
+
+/* Switches get the brand gradient behind the knob (the knob's own SVG
+   background-image is preserved via var(--bs-form-switch-bg) as a second,
+   top layer), matching the toggle look from the reference mockups. */
+[data-bs-theme="dark"] .form-switch .form-check-input:checked {
+    background-color: #0070FF;
+    background-image: var(--bs-form-switch-bg), linear-gradient(135deg, #FF335E 0%, #0070FF 100%);
+    border-color: transparent;
+}
+
+[data-bs-theme="dark"] .btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #0070FF;
+    --bs-btn-border-color: #0070FF;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #0057CC;
+    --bs-btn-hover-border-color: #0057CC;
+    --bs-btn-focus-shadow-rgb: 0, 112, 255;
+    --bs-btn-active-bg: #0057CC;
+    --bs-btn-active-border-color: #0057CC;
+    --bs-btn-disabled-bg: #0070FF;
+    --bs-btn-disabled-border-color: #0070FF;
+    background-image: linear-gradient(135deg, #FF335E 0%, #0070FF 100%);
+    border-color: transparent;
+    box-shadow: 0 2px 10px rgba(0, 112, 255, .35);
+    transition: box-shadow .2s ease, transform .2s ease, background-image .2s ease;
+}
+
+[data-bs-theme="dark"] .btn-primary:hover,
+[data-bs-theme="dark"] .btn-primary:focus {
+    background-image: linear-gradient(135deg, #E62955 0%, #0057CC 100%);
+    box-shadow: 0 8px 22px rgba(0, 112, 255, .4);
+    transform: translateY(-1px);
+}
+
+[data-bs-theme="dark"] .btn-primary:disabled,
+[data-bs-theme="dark"] .btn-primary.disabled {
+    background-image: linear-gradient(135deg, #FF335E 0%, #0070FF 100%);
+}
+
+[data-bs-theme="dark"] .btn-outline-primary {
+    --bs-btn-color: #4d9fff;
+    --bs-btn-border-color: #0070FF;
+    --bs-btn-hover-bg: #0070FF;
+    --bs-btn-hover-border-color: #0070FF;
+    --bs-btn-active-bg: #0057CC;
+    --bs-btn-active-border-color: #0057CC;
+}
+
+[data-bs-theme="dark"] .sidebar-wrapper .metismenu a:hover {
+    color: #fff;
+    background: rgba(0, 112, 255, .18);
+}
+
+[data-bs-theme="dark"] .sidebar-wrapper .metismenu .mm-active > a,
+[data-bs-theme="dark"] .sidebar-wrapper .metismenu a:active,
+[data-bs-theme="dark"] .sidebar-wrapper .metismenu a:focus {
+    color: #fff;
+    background: linear-gradient(135deg, #FF335E 0%, #0070FF 100%);
+    box-shadow: 0 4px 12px rgba(0, 112, 255, .35);
+}
+
+[data-bs-theme="dark"] .sidebar-wrapper .metismenu .mm-active > a iconify-icon,
+[data-bs-theme="dark"] .sidebar-wrapper .metismenu a:active iconify-icon,
+[data-bs-theme="dark"] .sidebar-wrapper .metismenu a:focus iconify-icon {
+    color: #fff;
+}
+
+[data-bs-theme="dark"] .page-link {
+    color: #4d9fff;
+}
+
+[data-bs-theme="dark"] .page-item.active .page-link {
+    color: #fff;
+    background-color: #0070FF;
+    background-image: linear-gradient(135deg, #FF335E 0%, #0070FF 100%);
+    border-color: transparent;
+}
+
+[data-bs-theme="dark"] .nav-pills .nav-link.active,
+[data-bs-theme="dark"] .nav-pills .show > .nav-link {
+    background-color: #0070FF;
+    background-image: linear-gradient(135deg, #FF335E 0%, #0070FF 100%);
+    color: #fff;
+}
+
+[data-bs-theme="dark"] .dropdown-item.active,
+[data-bs-theme="dark"] .dropdown-item:active {
+    background-color: #0070FF;
+}
+
+[data-bs-theme="dark"] .progress-bar {
+    background-color: #0070FF;
+}
+
+[data-bs-theme="dark"] .user-box .user-img {
+    box-shadow: 0 0 0 2px #1a2332, 0 0 0 4px rgba(0, 112, 255, .35);
+}
+
+[data-bs-theme="dark"] .user-box > a:hover {
+    background-color: rgba(255, 255, 255, .06);
+}
+
+[data-bs-theme="dark"] .table thead th {
+    color: rgba(255, 255, 255, .55);
+}

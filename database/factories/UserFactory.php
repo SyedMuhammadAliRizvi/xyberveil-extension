@@ -1,0 +1,78 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
+/**
+ * @extends Factory<User>
+ */
+class UserFactory extends Factory
+{
+    /**
+     * The current password being used by the factory.
+     */
+    protected static ?string $password;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        // Don't use Faker in production
+        return [
+            'name' => app()->environment(['production', 'development']) ? 'Default User' : fake()->name(),
+            'email' => app()->environment(['production', 'development']) ? 'default@example.com' : fake()->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => static::$password ??= Hash::make('password'),
+            'remember_token' => Str::random(10),
+            'role' => 'user',
+            'last_login' => null,
+        ];
+    }
+
+    /**
+     * Indicate that the model's email address should be unverified.
+     */
+    public function unverified(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'email_verified_at' => null,
+        ]);
+    }
+
+    /**
+     * Define an admin state.
+     */
+    public function admin(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'admin',
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make('admin12345'),
+                'role' => 'admin',
+            ];
+        });
+    }
+
+    /**
+     * Define a user state.
+     */
+    public function user(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'user',
+                'email' => 'user@gmail.com',
+                'password' => Hash::make('user12345'),
+                'role' => 'user',
+            ];
+        });
+    }
+}
