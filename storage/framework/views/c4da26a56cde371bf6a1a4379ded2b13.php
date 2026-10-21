@@ -227,9 +227,11 @@
                                         <iconify-icon icon="famicons:stats-chart-outline" width="18" height="18"></iconify-icon>
                                     </a>
                                     <button type="button" wire:click="runSetup(<?php echo e($server['id']); ?>)" title="Run SSH setup"
+                                        wire:loading.attr="disabled" wire:target="runSetup(<?php echo e($server['id']); ?>)"
                                         <?php if($server['setup_status'] === 'installing'): ?> disabled <?php endif; ?>
                                         class="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 text-success-500 transition-colors hover:border-success-300 hover:bg-success-50 disabled:opacity-50 dark:border-gray-800 dark:hover:border-success-500/30 dark:hover:bg-success-500/10">
-                                        <iconify-icon icon="mdi:cog-play" width="18" height="18"></iconify-icon>
+                                        <iconify-icon icon="mdi:cog-play" width="18" height="18" wire:loading.remove wire:target="runSetup(<?php echo e($server['id']); ?>)"></iconify-icon>
+                                        <iconify-icon icon="radix-icons:reload" width="18" height="18" class="animate-spin" wire:loading wire:target="runSetup(<?php echo e($server['id']); ?>)"></iconify-icon>
                                     </button>
                                     <button type="button" wire:click="syncUsers(<?php echo e($server['id']); ?>)" title="Sync users"
                                         class="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 text-blue-light-500 transition-colors hover:border-blue-light-300 hover:bg-blue-light-50 dark:border-gray-800 dark:hover:border-blue-light-500/30 dark:hover:bg-blue-light-500/10">
