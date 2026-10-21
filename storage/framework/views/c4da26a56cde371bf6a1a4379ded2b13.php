@@ -234,8 +234,10 @@
                                         <iconify-icon icon="radix-icons:reload" width="18" height="18" class="animate-spin" wire:loading wire:target="runSetup(<?php echo e($server['id']); ?>)"></iconify-icon>
                                     </button>
                                     <button type="button" wire:click="syncUsers(<?php echo e($server['id']); ?>)" title="Sync users"
-                                        class="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 text-blue-light-500 transition-colors hover:border-blue-light-300 hover:bg-blue-light-50 dark:border-gray-800 dark:hover:border-blue-light-500/30 dark:hover:bg-blue-light-500/10">
-                                        <iconify-icon icon="mdi:sync" width="18" height="18"></iconify-icon>
+                                        wire:loading.attr="disabled" wire:target="syncUsers(<?php echo e($server['id']); ?>)"
+                                        class="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 text-blue-light-500 transition-colors hover:border-blue-light-300 hover:bg-blue-light-50 disabled:opacity-50 dark:border-gray-800 dark:hover:border-blue-light-500/30 dark:hover:bg-blue-light-500/10">
+                                        <iconify-icon icon="mdi:sync" width="18" height="18" wire:loading.remove wire:target="syncUsers(<?php echo e($server['id']); ?>)"></iconify-icon>
+                                        <iconify-icon icon="radix-icons:reload" width="18" height="18" class="animate-spin" wire:loading wire:target="syncUsers(<?php echo e($server['id']); ?>)"></iconify-icon>
                                     </button>
                                     <button type="button" wire:click="openTerminal(<?php echo e($server['id']); ?>)" @click="$dispatch('open-modal-proxy-terminal')" title="Terminal"
                                         class="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 text-gray-500 transition-colors hover:border-gray-300 hover:bg-gray-50 dark:border-gray-800 dark:text-gray-400 dark:hover:border-gray-700 dark:hover:bg-white/5">
