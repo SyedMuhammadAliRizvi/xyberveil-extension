@@ -19,6 +19,11 @@ class ProxyExtensionController extends Controller
         return response()->json($this->extensionService->me($this->proxyUser($request)));
     }
 
+    public function xyberveilPlan(Request $request): JsonResponse
+    {
+        return response()->json($this->extensionService->xyberveilPlan($this->proxyUser($request)));
+    }
+
     public function servers(Request $request): JsonResponse
     {
         return response()->json($this->extensionService->servers($this->proxyUser($request)));

@@ -2106,3 +2106,6 @@ Stack trace:
 [2026-10-21 07:53:50] local.WARNING: Proxy agent call failed {"method":"POST","path":"/users","error":"cURL error 28: Connection timed out after 10011 milliseconds (see https://curl.se/libcurl/c/libcurl-errors.html) for http://57.128.218.97:9191/users"} 
 [2026-10-21 07:54:18] local.WARNING: Proxy agent call failed {"method":"POST","path":"/users","error":"cURL error 28: Connection timed out after 10004 milliseconds (see https://curl.se/libcurl/c/libcurl-errors.html) for http://57.128.218.97:9191/users"} 
 [2026-10-21 09:34:19] local.WARNING: Proxy agent call failed {"method":"POST","path":"/users","error":"cURL error 28: Connection timed out after 10006 milliseconds (see https://curl.se/libcurl/c/libcurl-errors.html) for http://57.128.218.97:9191/users"} 
+[2026-10-22 11:50:33] local.INFO: New user created: __test_xv_plan@example.com (ID: 9) (Role:user)  
+[2026-10-22 11:50:34] local.INFO: Trial granted to new user: __test_xv_plan@example.com for 7 days  
+[2026-10-22 11:50:37] local.WARNING: xyberveil.details.failed {"user_id":9,"status":401,"body":"{\"message\":\"Unauthenticated.\"}"} 

@@ -32,6 +32,7 @@ Route::middleware('throttle:api')->group(function () {
 
         Route::middleware('proxy.extension')->group(function () {
             Route::get('/me', [ProxyExtensionController::class, 'me']);
+            Route::get('/xyberveil-plan', [ProxyExtensionController::class, 'xyberveilPlan']);
             Route::get('/servers', [ProxyExtensionController::class, 'servers']);
             Route::get('/credentials/{serverId}', [ProxyExtensionController::class, 'credentials']);
             Route::post('/sessions/start', [ProxyExtensionController::class, 'startSession']);

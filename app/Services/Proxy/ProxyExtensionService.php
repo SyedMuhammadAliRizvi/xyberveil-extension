@@ -10,6 +10,8 @@ use App\Models\User;
 use App\Support\ProxyApiResponse;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class ProxyExtensionService
 {
@@ -39,6 +41,61 @@ class ProxyExtensionService
                 'started_at' => $active->started_at?->toIso8601String(),
             ] : null,
         ], $this->authService->accountProfile($user));
+    }
+
+    /**
+     * Live plan/subscription details from XyberVeil's own v3 API — called
+     * server-side with the user's stored session token (set by
+     * ProxyExtensionAuthService::otpLogin()/guestLogin()), never trusted
+     * from the extension directly.
+     */
+    public function xyberveilPlan(User $user): array
+    {
+        if (! $user->xyberveil_api_token) {
+            return ['available' => false];
+        }
+
+        try {
+            $response = Http::withToken($user->xyberveil_api_token)
+                ->timeout(8)
+                ->get('https://api.xyberveil.com/v3/details');
+        } catch (\Throwable $e) {
+            Log::warning('xyberveil.details.exception', [
+                'user_id' => $user->id,
+                'error' => $e->getMessage(),
+            ]);
+
+            return ['available' => false];
+        }
+
+        if (! $response->successful()) {
+            Log::warning('xyberveil.details.failed', [
+                'user_id' => $user->id,
+                'status' => $response->status(),
+                'body' => $response->body(),
+            ]);
+
+            return ['available' => false];
+        }
+
+        $data = $response->json() ?? [];
+
+        return [
+            'available' => true,
+            'plan' => $data['plan'] ?? null,
+            'active' => $data['active'] ?? null,
+            'expired' => $data['expired'] ?? null,
+            'expiry_date' => $data['expiry_date'] ?? null,
+            'is_pro' => $data['is_pro'] ?? null,
+            'is_trial' => $data['is_trial'] ?? null,
+            'days' => $data['days'] ?? null,
+            'plan_obj' => isset($data['plan_obj']) ? [
+                'title' => $data['plan_obj']['title'] ?? null,
+                'total_price_of_plan' => $data['plan_obj']['total_price_of_plan'] ?? null,
+                'price_per_month' => $data['plan_obj']['price_per_month'] ?? null,
+                'save_percent' => $data['plan_obj']['save_percent'] ?? null,
+            ] : null,
+        ];
     }
 
     public function servers(User $user): array
@@ -253,9 +310,18 @@ class ProxyExtensionService
 
     private function assertCanConnect(User $user): void
     {
-        if (! $user->canConnectProxy()) {
-            $this->abort('Trial expired — subscribe to continue.', 403);
+        if ($user->canConnectProxy()) {
+            return;
         }
+
+        // Local trial/subscription has lapsed — fall back to the same live
+        // XyberVeil plan shown on the Account screen before blocking.
+        $xyberveilPlan = $this->xyberveilPlan($user);
+        if ($xyberveilPlan['available'] && $xyberveilPlan['active']) {
+            return;
+        }
+
+        $this->abort('Trial expired — subscribe to continue.', 403);
     }
 
     private function abort(string $message, int $status): never
