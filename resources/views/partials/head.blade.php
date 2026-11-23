@@ -1,6 +1,7 @@
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <!-- This project is light-mode only — dark mode has been intentionally removed. -->
 <script>
     document.documentElement.setAttribute('data-bs-theme', 'light');
